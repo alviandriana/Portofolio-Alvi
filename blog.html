@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | Alvi Andriana</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              600: '#2563eb',
+              700: '#1d4ed8',
+            }
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'fade-in': 'fadeIn 1s ease-in',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans transition-colors duration-300 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="bg-white/80 dark:bg-gray-900/70 backdrop-blur-md shadow-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="index.html" class="text-lg font-bold text-primary-600 dark:text-primary-400 flex items-center gap-2">
+        <i class="fas fa-code text-xl"></i>
+        <span>Alvi</span>
+      </a>
+      <ul class="flex gap-4 text-sm font-medium text-gray-700 dark:text-gray-200">
+        <li><a href="index.html" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Beranda</a></li>
+        <li><a href="blog.html" class="text-primary-600 dark:text-primary-400 font-semibold">Blog</a></li>
+        <li><a href="projects.html" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Proyek</a></li>
+        <li><a href="about.html" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Tentang</a></li>
+        <li><a href="contact.html" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Kontak</a></li>
+        <li>
+          <button id="theme-toggle" class="p-1 rounded-full focus:outline-none">
+            <i class="fas fa-moon dark:hidden text-gray-700"></i>
+            <i class="fas fa-sun hidden dark:block text-yellow-300"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Konten Blog -->
+  <main class="max-w-4xl mx-auto p-6 mt-6 mb-10 flex-grow">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden animate-fade-in-down">
+      <!-- Hero Section -->
+      <div class="bg-gradient-to-r from-primary-600 to-blue-500 p-8 text-center text-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10">
+          <div class="absolute top-20 left-20 w-32 h-32 rounded-full bg-white animate-float"></div>
+          <div class="absolute bottom-10 right-20 w-24 h-24 rounded-full bg-white animate-float" style="animation-delay: 2s;"></div>
+          <div class="absolute top-1/3 right-1/4 w-16 h-16 rounded-full bg-white animate-float" style="animation-delay: 4s;"></div>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-bold mb-4 relative z-10">📝 Blog Saya</h1>
+        <p class="text-lg opacity-90 max-w-2xl mx-auto relative z-10">
+          Catatan perjalanan belajar, tips pengembangan web, dan pemikiran acak tentang teknologi.
+        </p>
+        <div class="mt-6 relative z-10">
+          <div class="inline-flex bg-white/20 rounded-full px-4 py-2 text-sm backdrop-blur-sm">
+            <i class="fas fa-tag mr-2"></i>
+            <span>#WebDev #Programming #Teknologi</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search and Filter -->
+      <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row gap-4 justify-between items-center">
+        <div class="relative w-full sm:w-96">
+          <input type="text" placeholder="Cari artikel..." 
+                 class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
+          <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+        </div>
+        <div class="flex gap-2">
+          <button class="px-3 py-1 text-sm rounded-full bg-primary-600 text-white hover:bg-primary-700 transition-colors">
+            Terbaru
+          </button>
+          <button class="px-3 py-1 text-sm rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+            Populer
+          </button>
+          <button class="px-3 py-1 text-sm rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+            Kategori
+          </button>
+        </div>
+      </div>
+
+      <!-- Artikel -->
+      <div class="p-6 space-y-6">
+        <!-- Featured Article -->
+        <article class="group relative overflow-hidden rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300">
+          <div class="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="p-6 flex flex-col md:flex-row gap-6">
+            <div class="md:w-1/3 overflow-hidden rounded-lg">
+              <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                   alt="Frontend Development" 
+                   class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+            </div>
+            <div class="md:w-2/3">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="px-2 py-1 text-xs font-medium bg-primary-100 dark:bg-primary-900/50 text-primary-800 dark:text-primary-200 rounded-full">Featured</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                  <i class="fas fa-clock text-xs"></i> 8 min read
+                </span>
+              </div>
+              <h2 class="text-xl md:text-2xl font-bold text-gray-800 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                <a href="#">Cara Memulai Belajar Frontend Development di 2025</a>
+              </h2>
+              <p class="mt-2 text-gray-600 dark:text-gray-300">
+                Panduan komprehensif untuk memulai karir sebagai frontend developer di tahun 2025. Mulai dari dasar HTML, CSS, JavaScript hingga framework modern seperti React, Vue, dan Svelte. Pelajari juga tools penting seperti Git, Figma, dan testing.
+              </p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full">#HTML</span>
+                <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full">#CSS</span>
+                <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full">#JavaScript</span>
+                <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full">#WebDev</span>
+              </div>
+              <div class="mt-4 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author" class="w-8 h-8 rounded-full">
+                  <span class="text-sm">Alvi Andriana</span>
+                </div>
+                <a href="#" class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline flex items-center gap-1">
+                  Baca selengkapnya <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Artikel Grid -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Artikel 1 -->
+          <article class="bg-gray-50 dark:bg-gray-700/30 p-6 rounded-xl shadow hover:shadow-lg transition-all duration-300 group border border-gray-200 dark:border-gray-700">
+            <div class="overflow-hidden rounded-lg mb-4">
+              <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                   alt="Tailwind CSS" 
+                   class="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105">
+            </div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <i class="far fa-calendar-alt"></i> 7 Juni 2025
+              </span>
+              <span class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <i class="far fa-comment-alt"></i> 12
+              </span>
+            </div>
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+              <a href="#">Mengapa Tailwind CSS Membuat Hidup Lebih Mudah?</a>
+            </h2>
+            <p class="mt-2 text-gray-600 dark:text-gray-300">
+              Tailwind adalah framework utility-first yang memudahkan styling dengan cepat tanpa menulis CSS panjang-panjang. Artikel ini membahas kelebihan Tailwind dibanding CSS tradisional dan framework lainnya.
+            </p>
+            <div class="mt-4 flex items-center justify-between">
+              <div class="flex gap-2">
+                <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full">#CSS</span>
+                <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full">#Tailwind</span>
+              </div>
+              <a href="#" class="text-primary-600 dark:text-primary-400 hover:underline text-sm">Baca →</a>
+            </div>
+          </article>
+
+          <!-- Artikel 2 -->
+          <article class="bg-gray-50 dark:bg-gray-700/30 p-6 rounded-xl shadow hover:shadow-lg transition-all duration-300 group border border-gray-200 dark:border-gray-700">
+            <div class="overflow-hidden rounded-lg mb-4">
+              <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                   alt="JavaScript Tips" 
+                   class="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105">
+            </div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <i class="far fa-calendar-alt"></i> 5 Juni 2025
+              </span>
+              <span class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <i class="far fa-comment-alt"></i> 8
+              </span>
+            </div>
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+              <a href="#">10 Tips JavaScript Modern untuk Developer Pemula</a>
+            </h2>
+            <p class="mt-2 text-gray-600 dark:text-gray-300">
+              Pelajari tips dan trik JavaScript modern yang akan membuat kode Anda lebih bersih, efisien, dan mudah dibaca. Termasuk fitur ES6+ yang wajib dikuasai.
+            </p>
+            <div class="mt-4 flex items-center justify-between">
+              <div class="flex gap-2">
+                <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full">#JavaScript</span>
+                <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full">#Tips</span>
+              </div>
+              <a href="#" class="text-primary-600 dark:text-primary-400 hover:underline text-sm">Baca →</a>
+            </div>
+          </article>
+
+          <!-- Artikel 3 -->
+          <article class="bg-gray-50 dark:bg-gray-700/30 p-6 rounded-xl shadow hover:shadow-lg transition-all duration-300 group border border-gray-200 dark:border-gray-700">
+            <div class="overflow-hidden rounded-lg mb-4">
+              <img src="https://images.unsplash.com/photo-1624953587687-daf255b6b80a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                   alt="Responsive Design" 
+                   class="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105">
+            </div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <i class="far fa-calendar-alt"></i> 2 Juni 2025
+              </span>
+              <span class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <i class="far fa-comment-alt"></i> 5
+              </span>
+            </div>
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+              <a href="#">Prinsip Dasar Responsive Design yang Wajib Diketahui</a>
+            </h2>
+            <p class="mt-2 text-gray-600 dark:text-gray-300">
+              Responsive design bukan hanya tentang media queries. Pelajari prinsip-prinsip fundamental yang membuat website terlihat bagus di semua perangkat.
+            </p>
+            <div class="mt-4 flex items-center justify-between">
+              <div class="flex gap-2">
+                <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full">#CSS</span>
+                <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full">#Responsive</span>
+              </div>
+              <a href="#" class="text-primary-600 dark:text-primary-400 hover:underline text-sm">Baca →</a>
+            </div>
+          </article>
+
+          <!-- Artikel 4 -->
+          <article class="bg-gray-50 dark:bg-gray-700/30 p-6 rounded-xl shadow hover:shadow-lg transition-all duration-300 group border border-gray-200 dark:border-gray-700">
+            <div class="overflow-hidden rounded-lg mb-4">
+              <img src="https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                   alt="Git Basics" 
+                   class="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105">
+            </div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <i class="far fa-calendar-alt"></i> 30 Mei 2025
+              </span>
+              <span class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <i class="far fa-comment-alt"></i> 15
+              </span>
+            </div>
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+              <a href="#">Panduan Git untuk Pemula: Dari Install sampai Kolaborasi</a>
+            </h2>
+            <p class="mt-2 text-gray-600 dark:text-gray-300">
+              Git adalah tool wajib bagi developer. Pelajari cara menggunakan Git dari dasar hingga fitur kolaborasi dengan GitHub/GitLab.
+            </p>
+            <div class="mt-4 flex items-center justify-between">
+              <div class="flex gap-2">
+                <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full">#Git</span>
+                <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full">#VersionControl</span>
+              </div>
+              <a href="#" class="text-primary-600 dark:text-primary-400 hover:underline text-sm">Baca →</a>
+            </div>
+          </article>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="mt-10 bg-gradient-to-r from-primary-500 to-blue-400 p-6 rounded-xl text-white">
+          <div class="max-w-2xl mx-auto text-center">
+            <h3 class="text-xl font-bold mb-2">📬 Tetap Terhubung</h3>
+            <p class="mb-4 opacity-90">Dapatkan artikel terbaru langsung ke email Anda. Tidak ada spam, hanya konten berkualitas.</p>
+            <form class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+              <input type="email" placeholder="Alamat email Anda" 
+                     class="flex-grow px-4 py-2 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white">
+              <button type="submit" class="px-6 py-2 bg-white text-primary-600 font-medium rounded-lg hover:bg-gray-100 transition-colors">
+                Berlangganan
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-8 flex justify-center">
+          <nav class="flex items-center gap-1">
+            <a href="#" class="px-3 py-1 rounded-lg bg-primary-600 text-white">1</a>
+            <a href="#" class="px-3 py-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">2</a>
+            <a href="#" class="px-3 py-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">3</a>
+            <a href="#" class="px-3 py-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">Next →</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Alvi Andriana</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">
+            Blog pribadi tentang pengembangan web, teknologi, dan catatan belajar.
+          </p>
+          <div class="mt-4 flex gap-4">
+            <a href="#" class="text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="#" class="text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" class="text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Navigasi</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Beranda</a></li>
+            <li><a href="blog.html" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Blog</a></li>
+            <li><a href="projects.html" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Proyek</a></li>
+            <li><a href="about.html" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Tentang</a></li>
+            <li><a href="contact.html" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Kontak</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Kategori</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Frontend</a></li>
+            <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Backend</a></li>
+            <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">UI/UX</a></li>
+            <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Tips</a></li>
+            <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Teknologi</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Kontak</h3>
+          <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+            <li class="flex items-center gap-2">
+              <i class="fas fa-envelope"></i>
+              <span>hello@alviandriana.com</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Bandung, Indonesia</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-200 dark:border-gray-700 mt-8 pt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+        © 2025 Alvi Andriana. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="fixed bottom-6 right-6 p-3 bg-primary-600 text-white rounded-full shadow-lg opacity-0 invisible transition-all duration-300">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script>
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    
+    // Check for saved theme preference or use preferred color scheme
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      html.classList.add('dark');
+    } else {
+      html.classList.remove('dark');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // Back to top button
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopButton.classList.remove('opacity-100', 'visible');
+        backToTopButton.classList.add('opacity-0', 'invisible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Animation on scroll
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementPosition < windowHeight - 100) {
+          element.classList.add('animate-fade-in');
+        }
+      });
+    };
+    
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
+  </script>
+
+  <!-- Animasi -->
+  <style>
+    @keyframes fade-in-down {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in-down {
+      animation: fade-in-down 0.6s ease-out forwards;
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 1s ease-in forwards;
+    }
+
+    .article-hover-effect {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .article-hover-effect:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      .animate-fade-in-down,
+      .animate-fade-in,
+      .article-hover-effect {
+        animation: none;
+        transition: none;
+      }
+    }
+  </style>
+</body>
+</html>
